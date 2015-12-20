@@ -10,7 +10,7 @@
 #
 # [*install_url*]
 #   Specifies the url from which the wordpress tarball should be downloaded.
-#   Default: http://wordpress.org
+#   Default: https://wordpress.org
 #
 # [*version*]
 #   Specifies the version of wordpress to install. Default: 3.8
@@ -84,7 +84,7 @@
 class wordpress (
   $install_dir          = '/opt/wordpress',
   $install_url          = 'https://wordpress.org',
-  $version              = '3.8',
+  $version              = '',
   $create_db            = true,
   $create_db_user       = true,
   $db_name              = 'wordpress',
