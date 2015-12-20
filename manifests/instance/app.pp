@@ -70,14 +70,17 @@ define wordpress::instance::app (
   }
   
   ## tar.gz. file name lang-aware
+  ## Changing default version of to latest
   if $wp_lang {
     $install_file_name = "wordpress-${version}-${wp_lang}.tar.gz"
-  } else {
+  } elsif $version {
     $install_file_name = "wordpress-${version}.tar.gz"
+  } else {
+    $install_file_name = "latest.tar.gz"
   }
 
   ## Download and extract
-  exec { "Download wordpress ${install_url}/wordpress-${version}.tar.gz to ${install_dir}":
+  exec { "Download WordPress: ${install_url}/${install_file_name} to ${install_dir}":
     command => "wget ${install_url}/${install_file_name}",
     creates => "${install_dir}/${install_file_name}",
     require => File[$install_dir],
