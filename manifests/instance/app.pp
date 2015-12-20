@@ -53,6 +53,12 @@ define wordpress::instance::app (
     logoutput => 'on_failure',
   }
 
+  # Making sure wget is updated on the host to avoid SSL certificate errors
+  # https://make.wordpress.org/meta/2014/09/23/wordpress-org-is-now-forced-ssl/
+  package { 'wget':
+    ensure => 'latest',
+  }
+
   ## Installation directory
   if ! defined(File[$install_dir]) {
     file { $install_dir:
