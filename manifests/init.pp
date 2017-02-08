@@ -10,7 +10,7 @@
 #
 # [*install_url*]
 #   Specifies the url from which the wordpress tarball should be downloaded.
-#   Default: http://wordpress.org
+#   Default: https://wordpress.org
 #
 # [*version*]
 #   Specifies the version of wordpress to install. Default: 3.8

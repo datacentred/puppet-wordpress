@@ -27,7 +27,7 @@ This will set up one or more installations of Wordpress 3.8 on Debian and Redhat
   Specifies the directory into which wordpress should be installed. Default: `/opt/wordpress`
 
 * `install_url`<br />
-  Specifies the url from which the wordpress tarball should be downloaded.  Default: `http://wordpress.org`
+  Specifies the url from which the wordpress tarball should be downloaded.  Default: `https://wordpress.org`
 
 * `version`<br />
   Specifies the version of wordpress to install. Default: `3.8`

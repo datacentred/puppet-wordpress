@@ -53,6 +53,12 @@ define wordpress::instance::app (
     logoutput => 'on_failure',
   }
 
+  # Making sure wget is updated on the host to avoid SSL certificate errors
+  # https://make.wordpress.org/meta/2014/09/23/wordpress-org-is-now-forced-ssl/
+  package { 'wget':
+    ensure => 'latest',
+  }
+
   ## Installation directory
   if ! defined(File[$install_dir]) {
     file { $install_dir:
@@ -64,6 +70,7 @@ define wordpress::instance::app (
   }
   
   ## tar.gz. file name lang-aware
+  ## Changing default version of to latest
   if $wp_lang {
     $install_file_name = "wordpress-${version}-${wp_lang}.tar.gz"
   } elsif $version {
@@ -73,7 +80,7 @@ define wordpress::instance::app (
   }
 
   ## Download and extract
-  exec { "Download wordpress ${install_url}/wordpress-${version}.tar.gz to ${install_dir}":
+  exec { "Download WordPress: ${install_url}/${install_file_name} to ${install_dir}":
     command => "wget ${install_url}/${install_file_name}",
     creates => "${install_dir}/${install_file_name}",
     require => File[$install_dir],
@@ -98,7 +105,7 @@ define wordpress::instance::app (
   concat { "${install_dir}/wp-config.php":
     owner   => $wp_owner,
     group   => $wp_group,
-    mode    => '0640',
+    mode    => '0755',
     require => Exec["Extract wordpress ${install_dir}"],
   }
   if $wp_config_content {
