@@ -71,12 +71,10 @@ define wordpress::instance::app (
   
   ## tar.gz. file name lang-aware
   ## Changing default version of to latest
-  if $wp_lang {
-    $install_file_name = "wordpress-${version}-${wp_lang}.tar.gz"
-  } elsif $version {
+  if $version {
     $install_file_name = "wordpress-${version}.tar.gz"
   } else {
-    $install_file_name = "latest.tar.gz""
+    $install_file_name = "latest.tar.gz"
   }
 
   ## Download and extract
